@@ -1,0 +1,38 @@
+
+
+.container{
+    margin: 10%;
+    display: flex;
+    width: 500px;
+    align-content: space-evenly;
+}
+
+.text{
+    padding: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 400px ;
+}
+img{
+    width: 400px;
+    height: 250px;
+    cursor: pointer;
+}
+
+html, body {
+    margin: 0;
+    top: 100px;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+footer {
+    padding: 10px;
+    text-align: center;
+    color: white;
+    background-color: rgb(27, 27, 26);
+}

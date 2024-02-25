@@ -1,0 +1,141 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHNYD</title>
+    <link rel="stylesheet" href="{% static './register.css' %}">
+    <link rel="shortcut icon" href="{% static './Images/logo-with-back-color-final-1-edited.webp' %}" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="{% url 'home' %}">CHNYD</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav ms-auto">
+              <a class="nav-link active" aria-current="page" href="{% url 'LoginFo' %}">Login</a>
+              <a class="nav-link active border border-white rounded" href="{% url 'RegisterPage' %}">Register</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <section class="form">
+        <div class="container">
+            <form id="form" method="POST">
+              {% csrf_token %}
+              <h1>Registration</h1>
+              <div class="input-control">
+                  <label for="username">Username</label>
+                  <input id="username" name="rname" type="text">
+                  <div class="error"></div>
+              </div>
+              <div class="input-control">
+                  <label for="email">Email</label>
+                  <input id="email" name="remail" type="text">
+                  <div class="error"></div>
+              </div>
+              <div class="input-control">
+                  <label for="password">Password</label>
+                  <input id="password" name="rpassword" type="password">
+                  <div class="error"></div>
+              </div>
+              <div class="input-control">
+                  <label for="password2">Confirm password</label>
+                  <input id="password2"name="rcpassword" type="password">
+                  <div class="error"></div>
+              </div>
+              <button type="submit">Register</button>
+          </form>
+        </div>
+      </section>
+
+      <footer>
+        <div>
+            <p>C.H.N.Y.D TRACE</p>
+        </div>
+      </footer>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+
+
+    <script>
+        document.getElementById('form').addEventListener('submit', function(event) {
+            var username = document.getElementById('username');
+            var email = document.getElementById('email');
+            var password = document.getElementById('password');
+            var confirmPassword = document.getElementById('password2');
+    
+            var errorDivs = document.querySelectorAll('.error');
+            errorDivs.forEach(function(div) {
+                div.textContent = ''; // Clear previous error messages
+            });
+    
+            var isValid = true;
+    
+            if (username.value.trim() === '') {
+                document.querySelector('#username + .error').textContent = 'Username is required.';
+                username.classList.add('invalid');
+                isValid = false;
+            } else {
+                username.classList.remove('invalid');
+            }
+    
+            // Email validation
+            if (email.value.trim() === '') {
+                document.querySelector('#email + .error').textContent = 'Email is required.';
+                email.classList.add('invalid');
+                isValid = false;
+            } else if (!isValidEmail(email.value)) {
+                document.querySelector('#email + .error').textContent = 'Invalid email format.';
+                email.classList.add('invalid');
+                isValid = false;
+            } else {
+                email.classList.remove('invalid');
+            }
+    
+            // Email validation helper function
+            function isValidEmail(email) {
+                var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailRegex.test(email);
+            }
+    
+            if (password.value.trim() === '') {
+                document.querySelector('#password + .error').textContent = 'Password is required.';
+                password.classList.add('invalid');
+                isValid = false;
+            } else {
+                password.classList.remove('invalid');
+            }
+    
+            if (password.value !== confirmPassword.value) {
+                document.querySelector('#password2 + .error').textContent = 'Passwords do not match.';
+                confirmPassword.classList.add('invalid');
+                isValid = false;
+            } else {
+                confirmPassword.classList.remove('invalid');
+            }
+    
+            if (!isValid) {
+                event.preventDefault(); // Prevent form submission if validation fails
+            }
+        });
+    </script>
+    
+    
+
+</body>
+</html>
+
+
+
+
